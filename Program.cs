@@ -15,14 +15,36 @@ namespace GenericGraph_2
             f.NewVertex("Дормидон");
             f.NewVertex("Пафнутий");
             f.NewVertex("Натаха");
-            f.NewVertex("Василий");
+            f.NewVertex("Иван");
             f.NewEdge(0, 1, "Друг");
-            f.NewEdge(1, 3, "Друг");
-            f.NewEdge(2, 3, "Мутит");
-            Console.WriteLine(f.ToString());
+            f.NewEdge(1, 0, "Друг");
+            f.NewEdge(1, 2, "Друг");
+            f.NewEdge(2, 1, "Друг");
+            f.NewEdge(2, 3, "Друг");
+            f.NewEdge(3, 2, "Друг");
+            f.NewEdge(3, 4, "Друг");
+            f.NewEdge(4, 3, "Друг");
 
-            Console.WriteLine(f.ReturnId("Дормидон"));
-            Console.WriteLine(f.ReturnVert(4));
+            Console.WriteLine("Обход в глубину:");
+            f.PreDepth(0, new Action<string>(x => Console.WriteLine(x)));
+            Console.WriteLine("Press ENTER to continue..."); Console.ReadKey();
+
+            Console.WriteLine("Обход в ширину:");
+            f.Width(0, new Action<string>(x => Console.WriteLine(x)));
+            Console.WriteLine("Press ENTER to continue..."); Console.ReadKey();
+
+            Console.WriteLine("Узлы и дуги:");
+            Console.WriteLine(f.ToString());
+            Console.WriteLine("Press ENTER to continue..."); Console.ReadKey();
+
+            Console.WriteLine("Найти id узла по его имени: ");
+            Console.WriteLine(f.ReturnId(Console.ReadLine()));
+            Console.WriteLine();
+            Console.WriteLine("Найти узел по его id: ");
+            Console.WriteLine(f.ReturnVert(Convert.ToInt32(Console.ReadLine())));
+
+
+
             //Graph<int, int> g = new Graph<int, int>();
             //g.NewVertex(0);
             //g.NewVertex(1);
@@ -32,13 +54,13 @@ namespace GenericGraph_2
             //g.NewEdge(1, 2, 1);
             //g.NewEdge(2, 0, 1);
             //g.NewEdge(2, 3, 1);
-            //g.PreDepth(0);
-            //g.Width(0);
+            //
+            //
             //Console.WriteLine(g.ToString());
             //g.DeleteEdge(2, 3);
             //g.DeleteVertex(3);
             //Console.WriteLine(g.ToString());
-            Console.ReadKey();
+            Console.WriteLine("\nPress ENTER to EXIT..."); Console.ReadKey();
         }
     }
 }

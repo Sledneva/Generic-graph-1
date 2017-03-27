@@ -80,26 +80,28 @@ namespace GenericGraph_2
             return result;
         }
 
-        public void PreDepth(int startInd)
+        public void PreDepth(int startInd, Action<V> act)
         {
+            act(vertexes[startInd]);
             visitedVertexes = new List<int>();
-            Depth(startInd);
+            Depth(startInd, act);
         }
-        private void Depth(int startInd)
+        private void Depth(int startInd, Action<V> act)
         {
             visitedVertexes.Add(startInd);
             foreach (int n in FindRelatedIndexes(startInd))
             {
                 if (!visitedVertexes.Contains(n))
                 {
-
-                    Depth(n);
+                    act(vertexes[n]);
+                    Depth(n, act);
                 }
             }
         }
 
-        public void Width(int startInd)
+        public void Width(int startInd, Action<V> act)
         {
+            act(vertexes[startInd]);
             visitedVertexes = new List<int>();
             visitedVertexes.Add(startInd);
             Queue<int> queue = new Queue<int>();
@@ -111,6 +113,7 @@ namespace GenericGraph_2
                 {
                     if (!visitedVertexes.Contains(n))
                     {
+                        act(vertexes[n]);
                         visitedVertexes.Add(n);
                         queue.Enqueue(n);
                     }
